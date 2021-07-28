@@ -31,7 +31,6 @@ const getProducts = async (): Promise<CartItemType[]> =>  // using promise becau
 
 const App = () => {
   const {data, isLoading, error } = useQuery<CartItemType[]>('products', getProducts)
-  console.log(data)
 
   const getTotalItems = () => null
 
