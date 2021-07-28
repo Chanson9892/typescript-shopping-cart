@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 
 //components
+import Item from './Item/Item'
 import { Drawer } from '@material-ui/core';
 import { LinearProgress } from '@material-ui/core';
 import Grid  from '@material-ui/core/Grid';
@@ -31,10 +32,20 @@ const getProducts = async (): Promise<CartItemType[]> =>  // using promise becau
 const App = () => {
   const {data, isLoading, error } = useQuery<CartItemType[]>('products', getProducts)
   console.log(data)
+
+  const getTotalItems = () => null
+
+  const handleAddToCart = (clickedItem: CartItemType) => null
+
+  const handleRemoveToCart = () => null
+
+  if (isLoading) return <LinearProgress /> // adds a loading bar at the top while waiting for fetch
+  if (error) return <div>something went wrong...</div>
+
   return (
-    <div className="App">
-      start
-    </div>
+    <Wrapper>
+      
+    </Wrapper>
   );
 }
 
