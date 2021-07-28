@@ -24,11 +24,13 @@ export type CartItemType = {
 }
 
 //api
-const getProducts = async (): Promise<CartItemType> =>  // using promise because of the await
+const getProducts = async (): Promise<CartItemType[]> =>  // using promise because of the await
   await (await fetch('https://fakestoreapi.com/products')).json()  // the inner await is for the api call. outer is for converting it to json.
 
 
 const App = () => {
+  const {data, isLoading, error } = useQuery<CartItemType[]>('products', getProducts)
+  console.log(data)
   return (
     <div className="App">
       start
