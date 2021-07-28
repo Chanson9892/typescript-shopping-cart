@@ -13,7 +13,7 @@ type Props = {
 
 const Item: React.FC<Props> = ({item, handleAddToCart}) => { // functional component. this is to grab props for TS react component
 
-    <Wrapper>
+    return <Wrapper>
         <img src={item.image} alt={item.title} />
         <div>
             <h3>{item.title}</h3>

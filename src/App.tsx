@@ -37,14 +37,20 @@ const App = () => {
 
   const handleAddToCart = (clickedItem: CartItemType) => null
 
-  const handleRemoveToCart = () => null
+  const handleRemoveFromCart = () => null
 
   if (isLoading) return <LinearProgress /> // adds a loading bar at the top while waiting for fetch
   if (error) return <div>something went wrong...</div>
 
   return (
     <Wrapper>
-      
+      <Grid container spacing={3} >
+        {data?.map(item => (
+          <Grid item key={item.id} xs={12} sm={4}>
+            <Item item={item} handleAddToCart={handleAddToCart}/>
+          </Grid>
+        ) )} 
+      </Grid>
     </Wrapper>
   );
 }
