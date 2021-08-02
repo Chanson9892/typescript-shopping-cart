@@ -11,7 +11,7 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Badge from '@material-ui/core/Badge';
 
 //style 
-import { Wrapper } from './App.styles';
+import { Wrapper, StyledButton } from './App.styles';
 
 //types
 export type CartItemType = {
@@ -30,9 +30,12 @@ const getProducts = async (): Promise<CartItemType[]> =>  // using promise becau
 
 
 const App = () => {
+  const [cartOpen, setCartOpen] = useState(false); // boolean to tell us if the cart is open or closed
+  const [cartItems, setCartItems] = useState([] as CartItemType[]); 
+
   const {data, isLoading, error } = useQuery<CartItemType[]>('products', getProducts)
 
-  const getTotalItems = () => null
+  const getTotalItems = (items: CartItemType[]) => null
 
   const handleAddToCart = (clickedItem: CartItemType) => null
 
@@ -43,6 +46,14 @@ const App = () => {
 
   return (
     <Wrapper>
+      <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
+        Cart goes here
+      </Drawer>
+      <StyledButton onClick={() => setCartOpen(true)}>
+        <Badge badgeContent={getTotalItems(cartItems)} color="error">
+          <AddShoppingCartIcon />
+        </Badge>
+      </StyledButton>
       <Grid container spacing={3} >
         {data?.map(item => (
           <Grid item key={item.id} xs={12} sm={4}>
