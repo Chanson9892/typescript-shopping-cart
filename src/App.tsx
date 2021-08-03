@@ -49,7 +49,18 @@ const App = () => {
     })
   };
 
-  const handleRemoveFromCart = () => null
+  const handleRemoveFromCart = (id: number) => {
+    setCartItems(prev => 
+      prev.reduce((acc, item) => {
+        if (item.id === id) { // if id is correct
+          if (item.amount === 1) return acc; // remove from cart completely
+          return [...acc, {...item, amount: item.amount - 1}]; // remove 1
+        } else {
+          return [...acc, item]; // return items 
+        }
+      }, [] as CartItemType[])
+    )
+  }
 
   if (isLoading) return <LinearProgress /> // adds a loading bar at the top while waiting for fetch
   if (error) return <div>something went wrong...</div>
